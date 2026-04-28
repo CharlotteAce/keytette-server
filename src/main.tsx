@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { App } from "./App";
+import { App } from "./pages/TopPage";
 import { Player } from "./components/Player";
 import { AlbumPage } from "./pages/AlbumPage";
 import "normalize.css"

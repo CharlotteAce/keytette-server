@@ -1,6 +1,6 @@
 import React from "react";
-import { AlbumList } from "./components/AlbumList";
-import { buildAlbums } from "./utils/jacket";
+import { AlbumList } from "../components/AlbumList";
+import { buildAlbums } from "../utils/jacket";
 
 const modules = import.meta.glob("/src/assets/albums/*/*/*", {
   eager: true,
