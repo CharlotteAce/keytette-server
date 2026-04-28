@@ -46,7 +46,7 @@ export const AlbumPage: React.FC = () => {
       {/* 楽曲一覧 */}
       <div className="track-grid">
         {mp3Files.map((file) => {
-          const name = (file.split("/").pop() ?? "").replace(/\.mp3$/i, "");
+          const name = (decodeURI(file.split("/").pop() ?? "").replace(/\.mp3$/i, ""));
 
           return (
             <div className="track"
