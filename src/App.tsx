@@ -13,8 +13,8 @@ type Category = {
 };
 
 const categories: Category[] = [
-  { key: "new_albums", title: "New Albums" },
-  { key: "other_albums", title: "Old Albums" },
+  { key: "new_albums", title: "新譜" },
+  { key: "other_albums", title: "その他の音楽" },
 ];
 
 const categoryAlbums = categories.map((cat) => {
@@ -38,7 +38,7 @@ const categoryAlbums = categories.map((cat) => {
 
 export const App: React.FC = () => {
   return (
-    <div>
+    <div className="page">
       {categoryAlbums.map((cat) => (
         <AlbumList key={cat.key} title={cat.title} albums={cat.albums} />
       ))}

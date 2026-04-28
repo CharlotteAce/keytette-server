@@ -1,6 +1,7 @@
 import React from "react";
 import { AlbumCard } from "./AlbumCard";
 import type { Album } from "./AlbumCard";
+import "./AlbumList.css";
 
 type Props = {
   albums: Album[];

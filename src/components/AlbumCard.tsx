@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./AlbumCard.css";
 
 export type Album = {
   name: string;

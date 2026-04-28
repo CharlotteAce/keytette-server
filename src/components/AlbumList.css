@@ -1,0 +1,19 @@
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 10rem);
+  gap: 0;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 320px) {
+  .album-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.album-grid h2{
+    margin: 0.6rem;
+    font-size: 1.6rem;
+    grid-column: 1 / -1;
+}

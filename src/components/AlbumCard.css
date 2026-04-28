@@ -1,0 +1,23 @@
+a.album-card {
+  padding: 0.6rem;
+  background: #0f0f0f;
+  border-radius: 1.2rem;
+  text-decoration: none;
+  color: white;
+}
+a.album-card:hover {
+    background: #303030;
+}
+
+.album-card div {
+    margin: 0.4rem;
+    background-color: initial;
+}
+
+.album-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background-color: aliceblue;
+  border-radius: 0.6rem;
+}

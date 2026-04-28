@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { App } from "./App";
 import { Player } from "./components/Player";
 import { AlbumPage } from "./pages/AlbumPage";
+import "normalize.css"
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
