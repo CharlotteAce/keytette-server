@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { buildAlbums } from "../utils/jacket";
 import { usePlayerStore } from "../store/playerStore";
+import "./AlbumPage.css";
 
 export const AlbumPage: React.FC = () => {
   const { category, albumName } = useParams<{ category: string; albumName: string }>();
@@ -32,26 +33,23 @@ export const AlbumPage: React.FC = () => {
   );
 
   return (
-    <div>
-      <h1>{album.name}</h1>
-
+    <div className="album-page">
       {/* ジャケット */}
       {album.jacketUrl && (
         <img
           src={album.jacketUrl}
           alt={album.name}
-          style={{ width: "300px" }}
         />
       )}
+      <h1>{album.name}</h1>
 
       {/* 楽曲一覧 */}
-      <ul>
-
+      <div className="track-grid">
         {mp3Files.map((file) => {
           const name = (file.split("/").pop() ?? "").replace(/\.mp3$/i, "");
 
           return (
-            <li
+            <div className="track"
               key={file}
               style={{ cursor: "pointer" }}
               onClick={() =>
@@ -63,10 +61,10 @@ export const AlbumPage: React.FC = () => {
               }
             >
               {name}
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };

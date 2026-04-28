@@ -1,0 +1,32 @@
+.album-page {
+  display: grid;
+  place-content: center;
+  place-items: center;
+  padding: 2rem 1rem 1rem;
+}
+
+.album-page img {
+  background-color: white;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,max(300px,100%));
+  gap: 0;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #b0b0b0;
+}
+
+.track {
+  padding: 1rem;
+  border-top: 1px solid #b0b0b0;
+}
+
+.track:hover, .track:active {
+  color: aquamarine;
+  background-color: #303030;
+}
