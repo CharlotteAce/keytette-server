@@ -3,19 +3,21 @@ import { buildAlbums } from "../utils/jacket";
 import { usePlayerStore } from "../store/playerStore";
 
 export const AlbumPage: React.FC = () => {
-  const { albumName } = useParams<{ albumName: string }>();
+  const { category, albumName } = useParams<{ category: string; albumName: string }>();
   const play = usePlayerStore((s) => s.play);
 
   // 指定ディレクトリのみ取得
   const modules = import.meta.glob(
-    "/src/assets/other_albums/*/*",
+    "/src/assets/albums/*/*/*",
     {
       eager: true,
-      import: "default",
+      as: "url",
     }
   ) as Record<string, string>;
 
-  const albums = buildAlbums(modules);
+  const albums = buildAlbums(modules).filter(
+    (a) => a.category === category
+  );
 
   // 該当アルバムを探す
   const album = albums.find((a) => a.name === albumName);
@@ -46,7 +48,7 @@ export const AlbumPage: React.FC = () => {
       <ul>
 
         {mp3Files.map((file) => {
-          const name = (file.split("/").pop() ?? "").replace(/\.mp3$/i, "");33;
+          const name = (file.split("/").pop() ?? "").replace(/\.mp3$/i, "");
 
           return (
             <li

@@ -13,8 +13,8 @@ dist-ssr
 *.local
 
 # albums
-src/assets/*
-!src/assets/.gitkeep
+src/assets/albums/*
+!src/assets/albums/.gitkeep
 
 # Editor directories and files
 .vscode/*

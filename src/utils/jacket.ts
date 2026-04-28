@@ -6,6 +6,7 @@ export type AlbumFile = {
 
 export type Album = {
   name: string;
+  category: string;
   jacketUrl?: string;
   files: string[];
 };
@@ -56,18 +57,28 @@ export const buildAlbums = (
   modules: Record<string, string>
 ): Album[] => {
   const albumMap: Record<string, string[]> = {};
+  const categoryMap: Record<string, string> = {};
 
   for (const path in modules) {
     const parts = path.split("/");
-    const albumName = parts[4];
+    const category = parts[4];
+    const albumName = parts[5];
 
-    if (!albumMap[albumName]) albumMap[albumName] = [];
-    albumMap[albumName].push(modules[path]);
+    const key = `${category}/${albumName}`;
+
+    if (!albumMap[key]) albumMap[key] = [];
+    albumMap[key].push(modules[path]);
+    categoryMap[key] = category;
   }
 
-  return Object.entries(albumMap).map(([name, files]) => ({
-    name,
-    files,
-    jacketUrl: pickJacket(files),
-  }));
+  return Object.entries(albumMap).map(([key, files]) => {
+    const [, name] = key.split("/");
+
+    return {
+      name,
+      category: categoryMap[key],
+      files,
+      jacketUrl: pickJacket(files),
+    };
+  });
 };
