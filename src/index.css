@@ -1,0 +1,33 @@
+.album-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, 160px);
+  gap: 12px;
+
+  justify-content: center;
+}
+
+/* h2を1行占有 */
+.album-grid-title {
+  grid-column: 1 / -1;
+}
+
+/* card */
+.album-card {
+  width: 160px;
+}
+
+.album-card img{
+  width: 100%;
+  max-width: 160px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+
+@media (max-width: 320px) {
+  .album-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
