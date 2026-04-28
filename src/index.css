@@ -4,3 +4,14 @@
   color: white;
 }
 
+.footer {
+  padding: 1rem;
+  text-align: center;
+}
+.footer, .footer a {
+  font-size: 12px;
+  color: #b0b0b0;
+}
+.footer a:hover {
+  color: white;
+}

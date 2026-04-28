@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/" element={<App />} />
         <Route path="/:category/:albumName" element={<AlbumPage />} />
       </Routes>
+      <div className="footer">Powered by <a href="https://github.com/CharlotteAce/keytette" target="_blank" rel="noopener noreferrer">key-tette</a> / <a href="https://charlotteace.github.io" target="_blank" rel="noopener noreferrer">charlotteace</a></div>
       <Player />
     </BrowserRouter>
   </React.StrictMode>
