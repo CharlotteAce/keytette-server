@@ -1,12 +1,12 @@
 a.album-card {
   padding: 0.6rem;
-  background: #0f0f0f;
+  background: var(--main-bg-black);
   border-radius: 1.2rem;
   text-decoration: none;
-  color: white;
+  color: var(--main-white);
 }
 a.album-card:hover {
-    background: #303030;
+    background: var(--main-dark);
 }
 
 .album-card div {
@@ -18,6 +18,6 @@ a.album-card:hover {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  background-color: aliceblue;
+  background-color: var(--main-white);
   border-radius: 0.6rem;
 }

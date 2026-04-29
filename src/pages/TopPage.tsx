@@ -38,7 +38,7 @@ const categoryAlbums = categories.map((cat) => {
 
 export const App: React.FC = () => {
   return (
-    <div className="page">
+    <div className="top-page">
       {categoryAlbums.map((cat) => (
         <AlbumList key={cat.key} title={cat.title} albums={cat.albums} />
       ))}

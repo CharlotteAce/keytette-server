@@ -1,7 +1,12 @@
 *{
+  --main-bg-black: #0f0f0f;
+  --main-dark: #303030;
+  --main-gray: #b0b0b0;
+  --main-white: white;
+  --main-active: aquamarine;
   font-size: 16px;
-  background-color: #0f0f0f;
-  color: white;
+  background-color: var(--main-bg-black);
+  color: var(--main-white);
 }
 
 .footer {
@@ -10,8 +15,8 @@
 }
 .footer, .footer a {
   font-size: 12px;
-  color: #b0b0b0;
+  color: var(--main-gray);
 }
 .footer a:hover {
-  color: white;
+  color: var(--main-white);
 }

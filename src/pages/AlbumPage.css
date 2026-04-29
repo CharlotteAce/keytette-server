@@ -6,7 +6,7 @@
 }
 
 .album-page img {
-  background-color: white;
+  background-color: var(--main-white);
   border-radius: 1rem;
   width: 100%;
   max-width: 300px;
@@ -18,15 +18,15 @@
   gap: 0;
   justify-content: center;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #b0b0b0;
+  border-bottom: 1px solid var(--main-gray);
 }
 
 .track {
   padding: 1rem;
-  border-top: 1px solid #b0b0b0;
+  border-top: 1px solid var(--main-gray);
 }
 
 .track:hover, .track:active {
-  color: aquamarine;
-  background-color: #303030;
+  color: var(--main-active);
+  background-color: var(--main-dark);
 }
