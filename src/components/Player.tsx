@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePlayerStore } from "../store/playerStore";
 import "./Player.css";
+import { MarqueeText } from "./MarqueeText";
 
 export const Player = () => {
   const { track, isPlaying, stop } = usePlayerStore();
@@ -93,11 +94,14 @@ export const Player = () => {
       {/* 実体（fixed） */}
       <div className="player">
         <div className="title-props">
-          <div className="music-title">
-            <span className={isPlaying ? "scroll" : ""}>
-              {track.title}
-            </span>
-          </div>
+          <MarqueeText text={track.title}
+            state={
+              ended ? "reset"
+              : paused ? "pause"
+              : isPlaying ? "play"
+              : "reset"
+            }
+          />
           <button className="cancel" onClick={stop}>×</button>
         </div>
         <div className="play-props">

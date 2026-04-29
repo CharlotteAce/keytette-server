@@ -17,13 +17,15 @@
 
 .player .title-props, .player .play-props {
   display: flex;
+  gap: 0.6rem;
   justify-content: space-between;
   align-items: center;
 }
+.player .title-props {
+  margin-bottom: 0.6rem;
+}
 
 .play {
-  width: 40px;
-  height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -46,8 +48,6 @@
   appearance: none;
   width: 100%;
   height: 32px;       /* 当たり判定を増やすため */
-  padding-right: 1rem;
-  padding-left: 0.5rem;
   background: transparent;
   outline: none;
   touch-action: pan-y;
