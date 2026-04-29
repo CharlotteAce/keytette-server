@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { usePlayerStore } from "../store/playerStore";
+import "./Player.css";
 
 export const Player = () => {
   const { track, isPlaying, stop } = usePlayerStore();
@@ -8,6 +9,7 @@ export const Player = () => {
   const [duration, setDuration] = useState(0);
   const [ended, setEnded] = useState(false);
   const [paused, setPaused] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     if (!audioRef.current) return;
@@ -84,30 +86,56 @@ export const Player = () => {
   if (!track) return null;
 
   return (
-    <div style={{
-      position: "fixed",
-      bottom: 0,
-      width: "100wh",
-      background: "#111",
-      color: "#fff",
-      padding: "10px"
-    }}>
-      <div>{track.title}</div>
-      <button onClick={togglePlay}>
-        {ended || paused ? "▶" : "⏸"}
-      </button>
-      <button onClick={stop}>×</button>
-        <input
-        type="range"
-        min={0}
-        max={duration || 0}
-        value={currentTime}
-        onChange={onSeek}
-        style={{ width: "100%" }}
-        step="0.01"
-    />
+    <>
+      {/* ダミー領域（レイアウト用） */}
+      <div style={{ height: "100px" }} />
 
-      <audio ref={audioRef} />
-    </div>
+      {/* 実体（fixed） */}
+      <div className="player">
+        <div className="title-props">
+          <div className="music-title">
+            <span className={isPlaying ? "scroll" : ""}>
+              {track.title}
+            </span>
+          </div>
+          <button className="cancel" onClick={stop}>×</button>
+        </div>
+        <div className="play-props">
+          <button className="play" onClick={togglePlay}>
+            {ended || paused ? (
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <polygon points="8,5 19,12 8,19" fill="white" />
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <rect x="6" y="5" width="4" height="14" fill="white" />
+                <rect x="14" y="5" width="4" height="14" fill="white" />
+              </svg>
+            )}
+          </button>
+
+          <input
+            className={`custom-slider ${isDragging ? "dragging" : ""}`}
+            type="range"
+            min={0}
+            max={duration || 0}
+            value={currentTime}
+            onChange={onSeek}
+            onMouseDown={() => setIsDragging(true)}
+            onMouseUp={() => setIsDragging(false)}
+            onMouseLeave={() => setIsDragging(false)}
+            onTouchStart={() => setIsDragging(true)}
+            onTouchEnd={() => setIsDragging(false)}
+            onTouchCancel={() => setIsDragging(false)}
+            style={{
+              width: "100%",
+              ["--progress" as any]: duration ? currentTime / duration : 0
+            }}
+            step="0.01"
+          />
+        </div>
+        <audio ref={audioRef} />
+      </div>
+    </>
   );
 };

@@ -1,0 +1,137 @@
+.player {
+  margin: 0.6rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--main-dark);
+  color: var(--main-white);
+  padding: 1rem;
+  border-radius: 0.6rem;
+  box-sizing: border-box;
+}
+
+.player * {
+  background: inherit;
+}
+
+.player .title-props, .player .play-props {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.play {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+
+.player button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+/* スライダーの設定 */
+.custom-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 32px;       /* 当たり判定を増やすため */
+  padding-right: 1rem;
+  padding-left: 0.5rem;
+  background: transparent;
+  outline: none;
+  touch-action: pan-y;
+  --progress: 0;
+}
+
+/* ===================== */
+/* track (webkit) */
+/* ===================== */
+.custom-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  transform-origin: center;
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.2s;
+
+  background: linear-gradient(
+    to right,
+    var(--main-white) calc(var(--progress) * 100%),
+    var(--main-gray) calc(var(--progress) * 100%)
+  );
+}
+
+/* active（JSで付与） */
+.custom-slider.dragging::-webkit-slider-runnable-track {
+  transform: scaleY(2);
+}
+
+/* ===================== */
+/* track (moz) */
+/* ===================== */
+.custom-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--main-gray);
+}
+
+.custom-slider::-moz-range-progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--main-white);
+}
+
+/* active */
+.custom-slider.dragging::-moz-range-track,
+.custom-slider.dragging::-moz-range-progress {
+  transform: scaleY(2);
+  transform-origin: center;
+}
+
+/* ===================== */
+/* thumb */
+/* ===================== */
+
+/* webkit */
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--main-white);
+  opacity: 0;
+  margin-top: -5px;
+  transform: scaleY(0.5);
+  transition: opacity 0.1s;
+}
+
+/* active */
+.custom-slider.dragging::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+/* moz */
+.custom-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  background: var(--main-white);
+  transform: scaleY(0.5);
+  opacity: 0;
+}
+
+/* active */
+.custom-slider.dragging::-moz-range-thumb {
+  opacity: 1;
+}
