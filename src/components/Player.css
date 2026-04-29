@@ -43,6 +43,10 @@
 }
 
 /* スライダーの設定 */
+.slider-hitbox {
+  width: 100%;
+}
+
 .custom-slider {
   -webkit-appearance: none;
   appearance: none;
@@ -50,7 +54,7 @@
   height: 32px;       /* 当たり判定を増やすため */
   background: transparent;
   outline: none;
-  touch-action: pan-y;
+  touch-action: none;
   --progress: 0;
 }
 

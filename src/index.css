@@ -7,6 +7,7 @@
   font-size: 16px;
   background-color: var(--main-bg-black);
   color: var(--main-white);
+  font-family: sans-serif;
 }
 
 .footer {
