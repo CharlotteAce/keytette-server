@@ -1,75 +1,54 @@
-# React + TypeScript + Vite
+# 即売会向け試聴サーバ key-tette (きいてって)
+## これは何？
+同人即売会等で音楽を頒布する際に必要な、試聴サーバのセットです。
+アルバムのフォルダを適切な場所に置いて起動するだけで、頒布ブースのPCで簡単に試聴ができます。
+同じLANに接続されている端末からもアクセスが可能で、来場者が自身の携帯端末で試聴することもできます。
+将来的には、PCの機能(e.g. モバイルホットスポット/Windows)を用いてアクセスポイントを提供し、無線LAN機材等なしでのリモート試聴の実現を目論んでいます。
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 使い方
+### 前提
+[npmが使用可能な状態](https://qiita.com/gahoh/items/8444da99a1f93b6493b4)になっている。
 
-Currently, two official plugins are available:
+### key-tetteのダウンロード
+このリポジトリを適当なフォルダにダウンロード。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### アルバムフォルダの作成
+各アルバムには、複数の`.mp3`ファイルとジャケット画像(任意)を含めることができます。
+画像が複数枚ある場合は、名前が`jacket`であるもの>名前に`jacket`を含むもの>`.webp`>`.svg`>`.png`>`.heic`>`.jpg`>`.bmp`の順で優先されます。
+詳細は`src/assets/new_albums/サンプル1` を参照してください。
 
-## React Compiler
+設定したアルバムフォルダ名がそのまま試聴画面で表示されます。
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+（暫定）曲の再生順を固定するために、`.mp3`ファイル名の先頭に`01 `等の数字+半角スペースをつけることを推奨します。
+将来的にはメタデータのトラック番号などから読みだす予定です。
 
-Note: This will impact Vite dev & build performances.
 
-## Expanding the ESLint configuration
+### アルバムフォルダの配置
+`src/assets/albums/new_albums`または`src/assets/albums/old_albums`配下に、アルバムフォルダを配置します。
+`src/config/categories.json`を編集することで、アルバムのグループを増やしたり名前を変更することができます。
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### サーバ起動(ビルドして実行)
+即売会本番はこちらが望ましいです。
+ファイルを配置したら、
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+npm run build
+npx serve -s dist
 ```
+を実行し、[http://localhost:3000](http://localhost:3000)へアクセス。
+同じLANに接続した別端末からも、`http://<your-ipv4-addres>:3000`でアクセス可能。
+ファイル構成を変更した場合は再ビルドが必要。
+
+### サーバ起動(開発環境で実行)
+```
+npm run dev
+```
+を実行し、[http://localhost:5173](http://localhost:5173)へアクセス。
+同じLANに接続した別端末からも、`http://<your-ipv4-addres>:5173`でアクセス可能。
+ファイル構成を編集しても即時反映されます。
+
+## 技術構成
+React+Vite
+
+## その他
+PR、レビュー等大歓迎です。
+何かあれば国際単位系/しのはら恵([X:@Units_SI](https://www.x.com/Units_SI))まで。
