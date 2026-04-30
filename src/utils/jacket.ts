@@ -15,7 +15,10 @@ export type Album = {
 const extPriority = ["webp", "svg", "png", "heic", "jpg", "bmp"];
 
 const getBaseName = (name: string) =>
-  name.replace(/\.[^.]+$/, "").toLowerCase();
+  name
+    .replace(/-[a-zA-Z0-9]{8}(?=\.[^.]+$)/, "") // ハッシュ除去
+    .replace(/\.[^.]+$/, "")
+    .toLowerCase();
 
 const getExt = (name: string) =>
   name.split(".").pop()?.toLowerCase() ?? "";
@@ -24,7 +27,7 @@ const getExt = (name: string) =>
 export const pickJacket = (files: string[]): string | undefined => {
   const candidates = files
     .map((url) => {
-      const fileName = url.split("/").pop() ?? "";
+      const fileName = (url.split("/").pop() ?? "").split("?")[0];
       return {
         url,
         base: getBaseName(fileName),
@@ -60,9 +63,11 @@ export const buildAlbums = (
   const categoryMap: Record<string, string> = {};
 
   for (const path in modules) {
-    const parts = path.split("/");
-    const category = parts[4];
-    const albumName = parts[5];
+    const match = path.match(/albums\/([^/]+)\/([^/]+)\//);
+    if (!match) continue;
+
+    const category = match[1];
+    const albumName = match[2];
 
     const key = `${category}/${albumName}`;
 

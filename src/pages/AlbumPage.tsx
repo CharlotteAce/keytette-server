@@ -9,10 +9,11 @@ export const AlbumPage: React.FC = () => {
 
   // 指定ディレクトリのみ取得
   const modules = import.meta.glob(
-    "/src/assets/albums/*/*/*",
+    "/src/assets/albums/**/*",
     {
       eager: true,
-      as: "url",
+      import: "default",
+      query: "?url",
     }
   ) as Record<string, string>;
 
@@ -24,7 +25,7 @@ export const AlbumPage: React.FC = () => {
   const album = albums.find((a) => a.name === albumName);
 
   if (!album) {
-    return <div>Album not found</div>;
+    return <div>Album not found: {category}/{albumName}</div>;
   }
 
   // mp3だけ抽出（とりあえず）
@@ -46,8 +47,9 @@ export const AlbumPage: React.FC = () => {
       {/* 楽曲一覧 */}
       <div className="track-grid">
         {mp3Files.map((file) => {
-          const name = (decodeURI(file.split("/").pop() ?? "").replace(/\.mp3$/i, ""));
-
+           const name = decodeURI(file.split("/").pop() ?? "")
+            .replace(/-[a-zA-Z0-9]{8}(?=\.mp3$)/, "") // ハッシュ除去
+            .replace(/\.mp3$/i, "");
           return (
             <div className="track"
               key={file}

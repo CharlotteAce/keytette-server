@@ -3,9 +3,10 @@ import { AlbumList } from "../components/AlbumList";
 import { buildAlbums } from "../utils/jacket";
 import categories from "../config/categories.json";
 
-const modules = import.meta.glob("/src/assets/albums/*/*/*", {
+const modules = import.meta.glob("/src/assets/albums/**/*", {
   eager: true,
-  as: "url",
+  import: "default",
+  query: "?url",
 }) as Record<string, string>;
 
 type Category = {
@@ -19,8 +20,8 @@ const categoryAlbums = typedCategories.map((cat) => {
   const filtered: Record<string, string> = {};
 
   for (const path in modules) {
-    const parts = path.split("/");
-    const categoryName = parts[4]; // ←ここも変わる
+    const match = path.match(/albums\/([^/]+)\//);
+    const categoryName = match?.[1];
 
     if (categoryName === cat.key) {
       filtered[path] = modules[path];
