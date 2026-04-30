@@ -6,18 +6,26 @@ a.album-card {
   color: var(--main-white);
 }
 a.album-card:hover {
-    background: var(--main-dark);
+  background: var(--main-dark);
 }
 
-.album-card div {
-    margin: 0.4rem;
-    background-color: initial;
+.album-card .album-name {
+  margin: 0.4rem;
+  background-color: initial;
 }
 
-.album-card img {
+.album-card .album-jacket {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   background-color: var(--main-white);
   border-radius: 0.6rem;
+}
+
+.album-card div.album-jacket {
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  color: var(--main-bg-black);
+  background-color: var(--main-gray);
 }

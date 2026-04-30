@@ -1,6 +1,7 @@
 import React from "react";
 import { AlbumList } from "../components/AlbumList";
 import { buildAlbums } from "../utils/jacket";
+import categories from "../config/categories.json";
 
 const modules = import.meta.glob("/src/assets/albums/*/*/*", {
   eager: true,
@@ -12,12 +13,9 @@ type Category = {
   title: string;
 };
 
-const categories: Category[] = [
-  { key: "new_albums", title: "新譜" },
-  { key: "other_albums", title: "その他の音楽" },
-];
+const typedCategories = categories as Category[];
 
-const categoryAlbums = categories.map((cat) => {
+const categoryAlbums = typedCategories.map((cat) => {
   const filtered: Record<string, string> = {};
 
   for (const path in modules) {

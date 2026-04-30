@@ -16,11 +16,11 @@ export const AlbumCard: React.FC<Props> = ({ album }) => {
   return (
     <Link to={`/${album.category}/${album.name}`} className="album-card">
       {album.jacketUrl ? (
-        <img src={album.jacketUrl} alt={album.name} />
+        <img className="album-jacket" src={album.jacketUrl} alt={album.name} />
       ) : (
-        <div>No Image</div>
+        <div className="album-jacket">No Image</div>
       )}
-      <div>{album.name}</div>
+      <div className="album-name">{album.name}</div>
     </Link>
   );
 };

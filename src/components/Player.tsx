@@ -71,63 +71,63 @@ export const Player = () => {
     };
   }, [isTouchingPlayer]);
 
-    // time update
-    useEffect(() => {
-      const audio = audioRef.current;
-      if (!audio) return;
+  // time update
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
 
-      const onLoaded = () => {
-        if (!isNaN(audio.duration)) {
-          setDuration(audio.duration);
-        }
-      };
-      const onEnded = () => setEnded(true);
-
-      let rafId: number;
-
-      const update = () => {
-        setCurrentTime(audio.currentTime);
-        rafId = requestAnimationFrame(update);
-      };
-
-      update();
-      audio.addEventListener("loadedmetadata", onLoaded);
-      audio.addEventListener("ended", onEnded);
-
-      return () => {
-        cancelAnimationFrame(rafId);
-        audio.removeEventListener("loadedmetadata", onLoaded);
-        audio.removeEventListener("ended", onEnded);
-      };
-    }, [track]);
-
-    const togglePlay = () => {
-      const audio = audioRef.current;
-      if (!audio) return;
-
-      if (ended) {
-        audio.currentTime = 0;
-        audio.play();
-        setEnded(false);
-        return;
-      }
-
-      if (audio.paused) {
-        audio.play();
-        setPaused(false);
-      } else {
-        audio.pause();
-        setPaused(true);
+    const onLoaded = () => {
+      if (!isNaN(audio.duration)) {
+        setDuration(audio.duration);
       }
     };
+    const onEnded = () => setEnded(true);
 
-    const onSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const audio = audioRef.current;
-      if (!audio) return;
-      const time = Number(e.target.value);
-      audio.currentTime = time;
-      setCurrentTime(time);
+    let rafId: number;
+
+    const update = () => {
+      setCurrentTime(audio.currentTime);
+      rafId = requestAnimationFrame(update);
     };
+
+    update();
+    audio.addEventListener("loadedmetadata", onLoaded);
+    audio.addEventListener("ended", onEnded);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      audio.removeEventListener("loadedmetadata", onLoaded);
+      audio.removeEventListener("ended", onEnded);
+    };
+  }, [track]);
+
+  const togglePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (ended) {
+      audio.currentTime = 0;
+      audio.play();
+      setEnded(false);
+      return;
+    }
+
+    if (audio.paused) {
+      audio.play();
+      setPaused(false);
+    } else {
+      audio.pause();
+      setPaused(true);
+    }
+  };
+
+  const onSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const time = Number(e.target.value);
+    audio.currentTime = time;
+    setCurrentTime(time);
+  };
 
   if (!track) return null;
 
