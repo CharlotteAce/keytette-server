@@ -48,7 +48,7 @@ export const AlbumPage: React.FC = () => {
       <div className="track-grid">
         {mp3Files.map((file) => {
            const name = decodeURI(file.split("/").pop() ?? "")
-            .replace(/-[a-zA-Z0-9]{8}(?=\.mp3$)/, "") // ハッシュ除去
+            .replace(/[.-][a-zA-Z0-9_-]{8}(?=\.mp3$)/, "") // ハッシュ除去
             .replace(/\.mp3$/i, "");
           return (
             <div className="track"
