@@ -14,6 +14,7 @@
 
 .track-grid {
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(auto-fill,max(300px,100%));
   gap: 0;
   justify-content: center;
