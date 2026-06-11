@@ -2,6 +2,7 @@ header {
   --charlotteace-theme: #1C4D8C;
   width: 100%;
   padding: 12px;
+  padding: 1rem 0;
   margin-bottom: 4px;
   background-color: var(--charlotteace-theme);
 }
@@ -23,6 +24,7 @@ div#header-wrapper {
 }
 header div#header-wrapper div {
   grid-column: 1 / -1; 
+  padding-left: 8px;
 }
 div#header-wrapper p {
   grid-column: 1 / -1; 
